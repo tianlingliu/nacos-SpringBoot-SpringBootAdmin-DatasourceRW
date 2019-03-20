@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: boot-admin
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+#      notify:
+#        mail:
+#          from: 373784047@qq.com
+#          to: liutianling@aibaoxian.com
+#  mail:
+#    host: smtp.qq.com
+#    username: 373784047@qq.com
+#    password: forever1314520
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#            required: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

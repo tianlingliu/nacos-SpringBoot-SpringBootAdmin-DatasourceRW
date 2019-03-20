@@ -1,0 +1,4 @@
+com/aibao/claims/auth/client/TestClient.class
+com/aibao/claims/auth/dto/User.class
+com/aibao/claims/auth/result/R.class
+com/aibao/claims/auth/result/ErrorCodeEnum.class

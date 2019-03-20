@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <groupId>com.aibao.claims</groupId>
+    <artifactId>auth_service</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <!-- 继承父包,此包会添加依赖,spring用到的核心包 -->
+
+    <parent>
+        <groupId>com.aibao.claims</groupId>
+        <artifactId>auth</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.aibao.claims</groupId>
+            <artifactId>auth_client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+        <resources>
+            <!--  本地最先排除掉测试文件，然后环境变量没有值不会导入配置文件，接着使用本地测试环境配置文件 这样可以解决springboot打包配置文件不打包的情况 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <!--<exclude>application.yaml</exclude>-->
+                    <!--<exclude>logback.xml</exclude>-->
+                    <exclude>conf/*</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>${package.environment}</directory>
+            </resource>
+        </resources>
+    </build>
+
+    <profiles>
+        <profile>
+            <!-- 本地开发环境 -->
+            <id>dev</id>
+            <properties>
+                <package.environment>src/main/resources/conf/dev</package.environment>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- 测试环境 -->
+            <id>beta</id>
+            <properties>
+                <package.environment>src/main/resources/conf/beta</package.environment>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 生产环境 -->
+            <id>prod</id>
+            <properties>
+                <package.environment>src/main/resources/conf/prdo</package.environment>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>

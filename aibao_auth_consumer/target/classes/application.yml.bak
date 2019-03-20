@@ -1,0 +1,32 @@
+#服务启动端口
+server:
+  port:  5001
+  tomcat:
+    uri-encoding: UTF-8
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+      health:
+        show-details: ALWAYS
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 139.224.148.138:8848
+  boot:
+    admin:
+      client:
+        url: http://139.224.148.138
+  application:
+    name: claims_auth_consumer
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
